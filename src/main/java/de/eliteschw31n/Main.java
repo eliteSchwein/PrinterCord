@@ -53,8 +53,10 @@ public class Main {
         System.out.println("Start Bot...");
         try {
             discordBot = JDABuilder.createDefault(mainConfiguration.getDiscordToken()).build();
+            System.out.println("Invite URL: https://discordapp.com/api/oauth2/authorize?client_id=" + discordBot.getSelfUser().getId() + "&permissions=8&scope=bot");
         } catch (LoginException e) {
             e.printStackTrace();
+            return;
         }
         System.out.println("Load Instances...");
         System.out.println("Startup Done!");
