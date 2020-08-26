@@ -29,7 +29,7 @@ public class Main {
         options.setPrettyFlow(true);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         Yaml yaml = new Yaml(options);
-        File mainConfigurationFile = new File("mainConfig.yaml");
+        File mainConfigurationFile = new File("mainConfig.yml");
         if (!mainConfigurationFile.exists()) {
             System.out.println("Main Configuration not found! Generating it now!");
             try {
@@ -44,7 +44,7 @@ public class Main {
             return;
         }
         yaml = new Yaml();
-        InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("mainConfig.yaml");
+        InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("/mainConfig.yml");
         Map<String, Object> yamlData = yaml.load(inputStream);
         mainConfiguration = new MainConfiguration(((String) yamlData.get("discordToken")));
         System.out.println("Check Database...");
