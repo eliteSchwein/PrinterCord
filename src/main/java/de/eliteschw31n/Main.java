@@ -8,10 +8,7 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
 import javax.security.auth.login.LoginException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -44,7 +41,12 @@ public class Main {
             return;
         }
         yaml = new Yaml();
-        InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("/mainConfig.yml");
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(mainConfigurationFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         Map<String, Object> yamlData = yaml.load(inputStream);
         mainConfiguration = new MainConfiguration(((String) yamlData.get("discordToken")));
         System.out.println("Check Database...");
