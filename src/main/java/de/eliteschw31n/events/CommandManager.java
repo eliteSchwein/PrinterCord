@@ -108,7 +108,7 @@ public class CommandManager extends ListenerAdapter {
                 event.getChannel().sendMessage("You cant Tag anyone via me......").queue();
                 return;
             }
-            event.getChannel().sendMessage(event.getMessage().getAuthor().getAsMention() + "\nCommand not found:\n```" + prefix + commandString + "```please use " + prefix + "help for the command list.").queue();
+            event.getChannel().sendMessage(event.getMessage().getAuthor().getAsMention() + "\nCommand not found:\n```" + commandString + "```please use " + prefix + "help for the command list.").queue();
         }
     }
 
