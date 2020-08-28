@@ -116,7 +116,11 @@
             <artifactId>snakeyaml</artifactId>
             <version>LATEST</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.vdurmont</groupId>
+            <artifactId>emoji-java</artifactId>
+            <version>LATEST</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -1,5 +1,6 @@
 package de.eliteschw31n.commands;
 
+import com.vdurmont.emoji.EmojiManager;
 import de.eliteschw31n.utils.Command;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -57,11 +58,11 @@ public class Help extends Command {
         if (message.isFromGuild()) {
             guild = message.getGuild();
         }
-        if (reactionEmote.getEmoji().equalsIgnoreCase("◀")) {
+        if (reactionEmote.getEmoji().equalsIgnoreCase(EmojiManager.getForAlias("arrow_backward").getUnicode())) {
             int Site = Integer.parseInt(message.getEmbeds().get(0).getAuthor().getName().replace("Help ", "").replace("General ", "").replace("Admin ", "").split("/")[0]);
             message.editMessage(getSite(Site, true, reactSender, guild, message).build()).queue();
         }
-        if (reactionEmote.getEmoji().equalsIgnoreCase("▶")) {
+        if (reactionEmote.getEmoji().equalsIgnoreCase(EmojiManager.getForAlias("arrow_forward").getUnicode())) {
             int Site = Integer.parseInt(message.getEmbeds().get(0).getAuthor().getName().replace("Help ", "").replace("General ", "").replace("Admin ", "").split("/")[0]);
             message.editMessage(getSite(Site, false, reactSender, guild, message).build()).queue();
         }
@@ -69,8 +70,8 @@ public class Help extends Command {
 
     @Override
     public void executeAddReact(Message message) {
-        message.addReaction("◀");
-        message.addReaction("▶");
+        message.addReaction(EmojiManager.getForAlias("arrow_backward").getUnicode()).queue();
+        message.addReaction(EmojiManager.getForAlias("arrow_forward").getUnicode()).queue();
     }
 
     private EmbedBuilder getSite(int site, boolean next, User user, Guild guild, Message message) {
