@@ -46,7 +46,7 @@ public class Help extends Command {
         if (message.isFromGuild()) {
             guild = message.getGuild();
         }
-        message.getChannel().sendMessage(getSite(2, false, message.getAuthor(), guild, message).build()).queue();
+        message.getChannel().sendMessage(getSite(2, false, message.getAuthor(), guild).build()).queue();
     }
 
     @Override
@@ -60,11 +60,11 @@ public class Help extends Command {
         }
         if (reactionEmote.getEmoji().equalsIgnoreCase(EmojiManager.getForAlias("arrow_backward").getUnicode())) {
             int Site = Integer.parseInt(message.getEmbeds().get(0).getAuthor().getName().replace("Help ", "").replace("General ", "").replace("Admin ", "").split("/")[0]);
-            message.editMessage(getSite(Site, true, reactSender, guild, message).build()).queue();
+            message.editMessage(getSite(Site, true, reactSender, guild).build()).queue();
         }
         if (reactionEmote.getEmoji().equalsIgnoreCase(EmojiManager.getForAlias("arrow_forward").getUnicode())) {
             int Site = Integer.parseInt(message.getEmbeds().get(0).getAuthor().getName().replace("Help ", "").replace("General ", "").replace("Admin ", "").split("/")[0]);
-            message.editMessage(getSite(Site, false, reactSender, guild, message).build()).queue();
+            message.editMessage(getSite(Site, false, reactSender, guild).build()).queue();
         }
     }
 
@@ -74,7 +74,7 @@ public class Help extends Command {
         message.addReaction(EmojiManager.getForAlias("arrow_forward").getUnicode()).queue();
     }
 
-    private EmbedBuilder getSite(int site, boolean next, User user, Guild guild, Message message) {
+    private EmbedBuilder getSite(int site, boolean next, User user, Guild guild) {
         EmbedBuilder embedBuilder = getEmbed(user);
         ArrayList<Command> adminCommands = new ArrayList<>();
         ArrayList<Command> generalCommands = new ArrayList<>();
