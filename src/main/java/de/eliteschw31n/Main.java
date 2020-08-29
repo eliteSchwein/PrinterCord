@@ -12,17 +12,14 @@ import oshi.hardware.CentralProcessor;
 import oshi.hardware.HardwareAbstractionLayer;
 
 import javax.security.auth.login.LoginException;
+import javax.swing.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
     private static Properties properties = new Properties();
-    private final ScheduledExecutorService cpuScheduler = Executors.newScheduledThreadPool(1);
     private MainConfiguration mainConfiguration;
     private JDA discordBot;
     private CommandManager commandManager;
@@ -77,11 +74,11 @@ public class Main {
         System.out.println("Load Instances...");
         System.out.println("Load OSHI...");
         systemInfo = new SystemInfo();
-        cpuScheduler.scheduleAtFixedRate(() -> {
+        Timer timer = new Timer(1000, e -> {
             HardwareAbstractionLayer hardwareAbstractionLayer = systemInfo.getHardware();
             CentralProcessor centralProcessor = hardwareAbstractionLayer.getProcessor();
             cpuPrevTicks = centralProcessor.getSystemCpuLoadTicks();
-        }, 1, 1, TimeUnit.SECONDS);
+        });
         System.out.println("Startup Done!");
     }
 
@@ -107,10 +104,6 @@ public class Main {
 
     public long[] getCpuPrevTicks() {
         return cpuPrevTicks;
-    }
-
-    public ScheduledExecutorService getCpuScheduler() {
-        return cpuScheduler;
     }
 
     public static void main(String[] args) {
