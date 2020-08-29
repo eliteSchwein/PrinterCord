@@ -25,6 +25,7 @@ public class Main {
     private CommandManager commandManager;
     private SystemInfo systemInfo;
     private long[] cpuPrevTicks = new long[CentralProcessor.TickType.values().length];
+    private double cpuLoad = 0;
 
     public Main() {
         System.out.println("PrinterCord " + properties.getProperty("version") + " starting...");
@@ -77,6 +78,7 @@ public class Main {
         Timer timer = new Timer(1000, e -> {
             HardwareAbstractionLayer hardwareAbstractionLayer = systemInfo.getHardware();
             CentralProcessor centralProcessor = hardwareAbstractionLayer.getProcessor();
+            cpuLoad = centralProcessor.getSystemCpuLoadBetweenTicks(cpuPrevTicks);
             cpuPrevTicks = centralProcessor.getSystemCpuLoadTicks();
         });
         System.out.println("Startup Done!");
@@ -102,8 +104,8 @@ public class Main {
         return systemInfo;
     }
 
-    public long[] getCpuPrevTicks() {
-        return cpuPrevTicks;
+    public double getCpuLoad() {
+        return cpuLoad;
     }
 
     public static void main(String[] args) {

@@ -65,7 +65,7 @@ public class ServerInfo extends Command {
                 "FIELD:Name:" + centralProcessor.getProcessorIdentifier().getName().replace(" ", "_") + " " +
                 "FIELD:Cores:" + centralProcessor.getLogicalProcessorCount() + "/" + centralProcessor.getPhysicalProcessorCount() + " " +
                 "FIELD:Arch:" + centralProcessor.getProcessorIdentifier().getMicroarchitecture().replace(" ", "_") + " " +
-                "FIELD:Usage:" + round(centralProcessor.getSystemCpuLoadBetweenTicks(getMain().getCpuPrevTicks()) * 100D, 2) + "% " +
+                "FIELD:Usage:" + round(getMain().getCpuLoad() * 100D, 2) + "% " +
                 "FIELD:Temp:" + round(sensors.getCpuTemperature(), 2) + "°C " +
                 "FIELD:Voltage:" + round(sensors.getCpuVoltage(), 4) + "V");
         StringBuilder ramBuilder = new StringBuilder();
