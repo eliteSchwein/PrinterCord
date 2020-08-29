@@ -61,9 +61,12 @@ public class ServerInfo extends Command {
         List<HWDiskStore> disks = hardwareAbstractionLayer.getDiskStores();
         double totalRam = randomAccessMemory.getTotal() / (double) (1024 * 1024 * 1024);
         double freeRam = randomAccessMemory.getAvailable() / (double) (1024 * 1024 * 1024);
+        double cpuMaxFreq = (double) centralProcessor.getMaxFreq() / 1000000.0D;
+        double cpuCurrentFreq = (double) centralProcessor.getCurrentFreq()[0] / 1000000.0D;
         pages.add("TITLE:CPU " +
                 "FIELD:Name:" + centralProcessor.getProcessorIdentifier().getName().replace(" ", "_") + " " +
                 "FIELD:Cores:" + centralProcessor.getLogicalProcessorCount() + "/" + centralProcessor.getPhysicalProcessorCount() + " " +
+                "FIELD:Freq:" + round(cpuCurrentFreq, 2) + "/" + round(cpuMaxFreq, 2) + "MHz " +
                 "FIELD:Arch:" + centralProcessor.getProcessorIdentifier().getMicroarchitecture().replace(" ", "_") + " " +
                 "FIELD:Usage:" + round(getMain().getCpuLoad() * 100D, 2) + "% " +
                 "FIELD:Temp:" + round(sensors.getCpuTemperature(), 2) + "°C " +
