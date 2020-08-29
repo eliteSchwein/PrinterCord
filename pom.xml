@@ -77,12 +77,12 @@
         <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
-            <version>LATEST</version>
+            <version>5.2.4</version>
         </dependency>
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>LATEST</version>
+            <version>4.2.0_198</version>
             <exclusions>
                 <exclusion>
                     <groupId>club.minnced</groupId>
@@ -99,7 +99,7 @@
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
-            <version>LATEST</version>
+            <version>0.9.12</version>
         </dependency>
         <dependency>
             <groupId>com.github.cliftonlabs</groupId>
@@ -119,7 +119,7 @@
         <dependency>
             <groupId>com.vdurmont</groupId>
             <artifactId>emoji-java</artifactId>
-            <version>LATEST</version>
+            <version>5.1.1</version>
         </dependency>
     </dependencies>
 
