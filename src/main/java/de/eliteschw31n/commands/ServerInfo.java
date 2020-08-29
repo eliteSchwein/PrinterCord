@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.User;
 import oshi.hardware.*;
 import oshi.software.os.OperatingSystem;
+import oshi.util.ExecutingCommand;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -62,6 +63,12 @@ public class ServerInfo extends Command {
         double totalRam = randomAccessMemory.getTotal() / (double) (1024 * 1024 * 1024);
         double freeRam = randomAccessMemory.getAvailable() / (double) (1024 * 1024 * 1024);
         double cpuCurrentFreq = (double) centralProcessor.getCurrentFreq()[0] / 1000000.0D;
+        double cpuVoltage;
+        if (ExecutingCommand.getFirstAnswer("vcgencmd measure_volts core") != null) {
+            cpuVoltage = Double.valueOf(ExecutingCommand.getFirstAnswer("vcgencmd measure_volts core").replaceAll("[^\\d|\\.]+", ""));
+        } else {
+            cpuVoltage = sensors.getCpuVoltage();
+        }
         pages.add("TITLE:CPU " +
                 "FIELD:Name:" + centralProcessor.getProcessorIdentifier().getName().replace(" ", "_") + " " +
                 "FIELD:Cores:" + centralProcessor.getLogicalProcessorCount() + "/" + centralProcessor.getPhysicalProcessorCount() + " " +
@@ -69,7 +76,7 @@ public class ServerInfo extends Command {
                 "FIELD:Arch:" + centralProcessor.getProcessorIdentifier().getMicroarchitecture().replace(" ", "_") + " " +
                 "FIELD:Usage:" + round(getMain().getCpuLoad() * 100D, 2) + "% " +
                 "FIELD:Temp:" + round(sensors.getCpuTemperature(), 2) + "°C " +
-                "FIELD:Voltage:" + sensors.getCpuVoltage() + "V");
+                "FIELD:Voltage:" + round(cpuVoltage, 4) + "V");
         StringBuilder ramBuilder = new StringBuilder();
         ramBuilder.append("TITLE:Ram" + " " +
                 "FIELD:Usage:" + round((totalRam - freeRam), 2) + "/" + round(totalRam, 2) + "GB" + " ");
