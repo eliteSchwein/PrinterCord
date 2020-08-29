@@ -1,4 +1,5 @@
-embed.help: http://example.com
-embed.general: http://example.com
-embed.adminhelp: http://example.com
-discordToken: 'NO'
+embedServerInfo: https://cdn.discordapp.com/attachments/665075819206541323/730140321870119020/serverinfo-hardware.jpg
+embedGeneral: https://cdn.discordapp.com/attachments/665075819206541323/730140365742669824/serverinfo-ping.jpg
+embedHelp: https://cdn.discordapp.com/attachments/665075819206541323/730140317113909248/help-general.jpg
+embedAdminHelp: https://cdn.discordapp.com/attachments/665075819206541323/730140316102819840/help-admin.jpg
+discordToken: 'Njg2Mjk2ODQ2NTIzNjk1MTcx.XmVJvg.Uxr-kggBFkV4t0G3tMe5QsHNDEA'
