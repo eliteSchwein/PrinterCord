@@ -81,7 +81,7 @@ public class Main {
             HardwareAbstractionLayer hardwareAbstractionLayer = systemInfo.getHardware();
             CentralProcessor centralProcessor = hardwareAbstractionLayer.getProcessor();
             cpuPrevTicks = centralProcessor.getSystemCpuLoadTicks();
-        }, 0, 20, TimeUnit.SECONDS);
+        }, 1, 1, TimeUnit.SECONDS);
         System.out.println("Startup Done!");
     }
 
