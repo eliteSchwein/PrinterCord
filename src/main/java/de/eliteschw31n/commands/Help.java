@@ -39,6 +39,7 @@ public class Help extends Command {
                         //}
                         message.getChannel().sendMessage(command.getExtendedDescription(prefix, message).build()).queue();
                     }
+                    return;
                 }
             }
         }
