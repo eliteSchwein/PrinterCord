@@ -37,7 +37,7 @@ public class Main {
         options.setPrettyFlow(true);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         Yaml yaml = new Yaml(options);
-        File mainConfigurationFile = new File("mainConfig.yml.old");
+        File mainConfigurationFile = new File("mainConfig.yml");
         if (!mainConfigurationFile.exists()) {
             System.out.println("Main Configuration not found! Generating it now!");
             try {
