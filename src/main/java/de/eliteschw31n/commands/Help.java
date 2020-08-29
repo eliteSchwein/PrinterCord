@@ -60,11 +60,11 @@ public class Help extends Command {
         }
         if (reactionEmote.getEmoji().equalsIgnoreCase(EmojiManager.getForAlias("arrow_backward").getUnicode())) {
             int Site = Integer.parseInt(message.getEmbeds().get(0).getAuthor().getName().replace("Help ", "").replace("General ", "").replace("Admin ", "").split("/")[0]);
-            message.editMessage(getSite(Site, true, reactSender, guild).build()).queue();
+            message.editMessage(getSite(Site, false, reactSender, guild).build()).queue();
         }
         if (reactionEmote.getEmoji().equalsIgnoreCase(EmojiManager.getForAlias("arrow_forward").getUnicode())) {
             int Site = Integer.parseInt(message.getEmbeds().get(0).getAuthor().getName().replace("Help ", "").replace("General ", "").replace("Admin ", "").split("/")[0]);
-            message.editMessage(getSite(Site, false, reactSender, guild).build()).queue();
+            message.editMessage(getSite(Site, true, reactSender, guild).build()).queue();
         }
     }
 
