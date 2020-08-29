@@ -5,12 +5,14 @@ public class MainConfiguration {
     private final String generalEmbed;
     private final String helpEmbed;
     private final String helpAdminEmbed;
+    private final String serverInfoEmbed;
 
-    public MainConfiguration(final String discordToken, final String generalEmbed, final String helpEmbed, final String helpAdminEmbed) {
+    public MainConfiguration(final String discordToken, final String generalEmbed, final String helpEmbed, final String helpAdminEmbed, final String serverInfoEmbed) {
         this.discordToken = discordToken;
         this.generalEmbed = generalEmbed;
         this.helpEmbed = helpEmbed;
         this.helpAdminEmbed = helpAdminEmbed;
+        this.serverInfoEmbed = serverInfoEmbed;
     }
 
     public String getDiscordToken() {
@@ -27,5 +29,9 @@ public class MainConfiguration {
 
     public String getHelpAdminEmbed() {
         return helpAdminEmbed;
+    }
+
+    public String getServerInfoEmbed() {
+        return serverInfoEmbed;
     }
 }

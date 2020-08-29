@@ -37,15 +37,16 @@ public class Main {
         options.setPrettyFlow(true);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         Yaml yaml = new Yaml(options);
-        File mainConfigurationFile = new File("mainConfig.yml");
+        File mainConfigurationFile = new File("mainConfig.yml.old");
         if (!mainConfigurationFile.exists()) {
             System.out.println("Main Configuration not found! Generating it now!");
             try {
                 Map<String, Object> data = new HashMap<>();
                 data.put("discordToken", "123456789");
-                data.put("embed.general", "http://example.com");
-                data.put("embed.help", "http://example.com");
-                data.put("embed.adminhelp", "http://example.com");
+                data.put("embedGeneral", "http://example.com");
+                data.put("embedHelp", "http://example.com");
+                data.put("embedAdminHelp", "http://example.com");
+                data.put("embedServerInfo", "http://example.com");
                 mainConfigurationFile.createNewFile();
                 FileWriter writer = new FileWriter(mainConfigurationFile.getAbsoluteFile());
                 yaml.dump(data, writer);
@@ -62,7 +63,7 @@ public class Main {
             e.printStackTrace();
         }
         Map<String, Object> yamlData = yaml.load(inputStream);
-        mainConfiguration = new MainConfiguration(((String) yamlData.get("discordToken")), (String) yamlData.get("embed.general"), (String) yamlData.get("embed.help"), (String) yamlData.get("embed.adminhelp"));
+        mainConfiguration = new MainConfiguration(((String) yamlData.get("discordToken")), (String) yamlData.get("embedGeneral"), (String) yamlData.get("embedHelp"), (String) yamlData.get("embedAdminHelp"), (String) yamlData.get("embedServerInfo"));
         System.out.println("Check Database...");
         System.out.println("Start Bot...");
         try {

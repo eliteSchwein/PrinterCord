@@ -146,6 +146,7 @@ public class ServerInfo extends Command {
             }
         }
         embedBuilder.setDescription(descriptionBuilder.toString());
+        embedBuilder.setThumbnail(getMain().getMainConfiguration().getServerInfoEmbed());
         embedBuilder.setAuthor("Serverinfo " + site + "/" + maxsite);
         return embedBuilder;
     }
