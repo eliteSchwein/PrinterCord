@@ -94,10 +94,13 @@ public class ServerInfo extends Command {
                 for (int iPart = 0; iPart < disks.get(i).getPartitions().size(); iPart++) {
                     HWPartition partition = disks.get(i).getPartitions().get(iPart);
                     double partitionSize = partition.getSize() / (double) (1024 * 1024 * 1024);
-                    diskBuilder.append("FIELD:Partition_" + (iPart + 1) + "_Name:" + partition.getName().replace(" ", "_").replace(":", ";") + " " +
-                            "FIELD:Partition_" + (iPart + 1) + "_Type:" + partition.getType().replace(" ", "_").replace(":", ";") + " " +
-                            "FIELD:Partition_" + (iPart + 1) + "_Mount:" + partition.getMountPoint().replace(" ", "_").replace(":", ";") + " " +
+                    diskBuilder.append("FIELD:Partition_" + (iPart + 1) + "_Type:" + partition.getType().replace(" ", "_").replace(":", ";") + " " +
                             "FIELD:Partition_" + (iPart + 1) + "_Size:" + round(partitionSize, 2) + "GB" + " ");
+                    if (partition.getMountPoint().replace(" ", "_").replace(":", ";").length() != 0) {
+                        diskBuilder.append("FIELD:Partition_" + (iPart + 1) + "_Mount:" + partition.getMountPoint().replace(" ", "_").replace(":", ";") + " ");
+                    } else {
+                        diskBuilder.append("FIELD:Partition_" + (iPart + 1) + "_Mount:" + "N/A" + " ");
+                    }
                 }
             }
             pages.add(diskBuilder.toString());
