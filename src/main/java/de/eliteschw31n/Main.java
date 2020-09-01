@@ -89,15 +89,6 @@ public class Main {
         return properties;
     }
 
-    public static void main(String[] args) {
-        try {
-            properties.load(Main.class.getResourceAsStream("/project.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        new Main();
-    }
-
     public JDA getDiscordBot() {
         return discordBot;
     }
@@ -116,5 +107,14 @@ public class Main {
 
     public double getCpuLoad() {
         return cpuLoad;
+    }
+
+    public static void main(String[] args) {
+        try {
+            properties.load(Main.class.getResourceAsStream("/project.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        new Main();
     }
 }
