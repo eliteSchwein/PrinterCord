@@ -247,5 +247,6 @@ buildNumber.properties
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/git,java,maven,dotenv,eclipse,intellij,code-java,visualstudiocode
+
 # ignore workflow
 .github/workflows/
