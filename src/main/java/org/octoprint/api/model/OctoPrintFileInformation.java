@@ -15,41 +15,41 @@ import java.io.Writer;
  * @author rweber
  */
 public abstract class OctoPrintFileInformation implements Jsonable, JSONLoader {
-	protected JsonObject m_data = null;
-	protected FileType m_type = null;
+    protected JsonObject m_data = null;
+    protected FileType m_type = null;
 
-	public OctoPrintFileInformation(FileType t, JsonObject json) {
-		m_type = t;
-		m_data = json;
-	}
+    public OctoPrintFileInformation(FileType t, JsonObject json) {
+        m_type = t;
+        m_data = json;
+    }
 
-	public String getName() {
-		return m_data.getString("name");
-	}
+    public String getName() {
+        return m_data.getString("name");
+    }
 
-	/**
-	 * @return the type of file (gcode,model,folder)
-	 */
-	public FileType getType() {
-		return m_type;
-	}
+    /**
+     * @return the type of file (gcode,model,folder)
+     */
+    public FileType getType() {
+        return m_type;
+    }
 
-	public String getPath() {
-		return m_data.getString("path");
-	}
+    public String getPath() {
+        return m_data.getString("path");
+    }
 
-	@Override
-	public void loadJSON(JsonObject json) {
-		m_data = json;
-	}
+    @Override
+    public void loadJSON(JsonObject json) {
+        m_data = json;
+    }
 
-	@Override
-	public String toJson() {
-		return m_data.toJson();
-	}
+    @Override
+    public String toJson() {
+        return m_data.toJson();
+    }
 
-	@Override
-	public void toJson(Writer writable) throws IOException {
-		writable.write(this.toJson());
-	}
+    @Override
+    public void toJson(Writer writable) throws IOException {
+        writable.write(this.toJson());
+    }
 }

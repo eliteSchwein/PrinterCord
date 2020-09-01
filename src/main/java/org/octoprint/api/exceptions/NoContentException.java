@@ -5,10 +5,10 @@ package org.octoprint.api.exceptions;
  */
 public class NoContentException extends OctoPrintAPIException {
 
-	public static final int STATUS_CODE = 204;
+    public static final int STATUS_CODE = 204;
 
-	public NoContentException(final String message) {
-		super(STATUS_CODE, message);
-	}
+    public NoContentException(final String message) {
+        super(STATUS_CODE, message);
+    }
 
 }

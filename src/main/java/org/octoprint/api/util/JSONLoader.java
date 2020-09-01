@@ -4,5 +4,5 @@ import org.json.simple.JsonObject;
 
 public interface JSONLoader {
 
-	public void loadJSON(JsonObject json);
+    public void loadJSON(JsonObject json);
 }

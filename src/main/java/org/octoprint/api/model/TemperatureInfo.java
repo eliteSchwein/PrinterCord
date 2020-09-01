@@ -14,66 +14,66 @@ import java.io.Writer;
  * @author rweber
  */
 public final class TemperatureInfo implements Jsonable, JSONLoader {
-	private String m_name = null;
-	private JsonObject m_data = null;
+    private String m_name = null;
+    private JsonObject m_data = null;
 
-	public TemperatureInfo() {
-		m_data = new JsonObject();
-		m_name = "Printer Device";
-	}
+    public TemperatureInfo() {
+        m_data = new JsonObject();
+        m_name = "Printer Device";
+    }
 
-	/**
-	 * @return the name of tool (Extruder, Print Bed, etc)
-	 */
-	public String getName() {
-		return m_name;
-	}
+    /**
+     * @return the name of tool (Extruder, Print Bed, etc)
+     */
+    public String getName() {
+        return m_name;
+    }
 
-	public void setName(String n) {
-		m_name = n;
-	}
+    public void setName(String n) {
+        m_name = n;
+    }
 
-	/**
-	 * @return the actual Temp of the tool in degrees celsius
-	 */
-	public Double getActualTemp() {
-		return m_data.getDouble("actual");
-	}
+    /**
+     * @return the actual Temp of the tool in degrees celsius
+     */
+    public Double getActualTemp() {
+        return m_data.getDouble("actual");
+    }
 
-	/**
-	 * @return the target temp in degrees celsius, returns -1 if no target is set
-	 */
-	public Double getTargetTemp() {
-		Double result = new Double(-1);    //-1 if no target is set
+    /**
+     * @return the target temp in degrees celsius, returns -1 if no target is set
+     */
+    public Double getTargetTemp() {
+        Double result = new Double(-1);    //-1 if no target is set
 
-		//can't use contains here, the value may exist and just be null
-		if (m_data.get("target") != null) {
-			result = m_data.getDouble("target");
-		}
+        //can't use contains here, the value may exist and just be null
+        if (m_data.get("target") != null) {
+            result = m_data.getDouble("target");
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * @return the offset, 0 if none
-	 */
-	public Long getOffset() {
-		return m_data.getLong("offset");
-	}
+    /**
+     * @return the offset, 0 if none
+     */
+    public Long getOffset() {
+        return m_data.getLong("offset");
+    }
 
-	@Override
-	public void loadJSON(JsonObject json) {
-		m_data = json;
-	}
+    @Override
+    public void loadJSON(JsonObject json) {
+        m_data = json;
+    }
 
-	@Override
-	public String toJson() {
-		return m_data.toJson();
-	}
+    @Override
+    public String toJson() {
+        return m_data.toJson();
+    }
 
-	@Override
-	public void toJson(Writer arg0) throws IOException {
-		arg0.write(this.toJson());
-	}
+    @Override
+    public void toJson(Writer arg0) throws IOException {
+        arg0.write(this.toJson());
+    }
 
 }

@@ -3,13 +3,9 @@ package de.eliteschw31n.events;
 import de.eliteschw31n.Main;
 import de.eliteschw31n.utils.Command;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.ChannelType;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
-import net.dv8tion.jda.api.events.message.react.MessageReactionRemoveEvent;
+import net.dv8tion.jda.api.events.message.react.GenericMessageReactionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.reflections.Reflections;
 
@@ -44,25 +40,10 @@ public class CommandManager extends ListenerAdapter {
     @Override
     public void onMessageReceived(final MessageReceivedEvent event) {
         if (event.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
-            if (event.isFromGuild()) {
-                if (!event.getGuild().getSelfMember().hasPermission(event.getGuild().getGuildChannelById(event.getChannel().getId()), Permission.MESSAGE_WRITE) && !event.getGuild().getSelfMember().hasPermission(event.getGuild().getGuildChannelById(event.getChannel().getId()), Permission.MESSAGE_ADD_REACTION)) {
-                    return;
-                }
+            if (!hasPermission(event.getMessage())) {
+                return;
             }
-            String keyWord = "";
-            if (event.getMessage().getEmbeds().size() != 0) {
-                MessageEmbed.AuthorInfo author = event.getMessage().getEmbeds().get(0).getAuthor();
-                if (author != null) {
-                    keyWord = author.getName();
-                } else {
-                    String title = event.getMessage().getEmbeds().get(0).getTitle();
-                    if (title != null) {
-                        keyWord = title;
-                    }
-                }
-            } else {
-                keyWord = event.getMessage().getContentRaw();
-            }
+            String keyWord = getKeyword(event.getMessage());
             if (keyWord == null) {
                 return;
             }
@@ -117,8 +98,9 @@ public class CommandManager extends ListenerAdapter {
     }
 
     @Override
-    public void onMessageReactionAdd(final MessageReactionAddEvent event) {
-        Message message = event.getChannel().retrieveMessageById(event.getMessageId()).complete();
+    public void onGenericMessageReaction(final GenericMessageReactionEvent event) {
+        MessageChannel channel = event.getChannel();
+        Message message = channel.retrieveMessageById(event.getMessageId()).complete();
         if (!message.getAuthor().isBot()) {
             return;
         }
@@ -128,80 +110,18 @@ public class CommandManager extends ListenerAdapter {
         if (event.getUser().isBot()) {
             return;
         }
-        if (message.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
-            String keyword = "";
-            if (message.getEmbeds().size() != 0) {
-                MessageEmbed.AuthorInfo author = message.getEmbeds().get(0).getAuthor();
-                if (author != null) {
-                    keyword = author.getName();
-                } else {
-                    String title = message.getEmbeds().get(0).getTitle();
-                    if (title != null) {
-                        keyword = title;
-                    }
-                }
-            } else {
-                keyword = message.getContentRaw();
-            }
-            if (keyword == null) {
-                return;
-            }
-            if (keyword.length() == 0) {
-                return;
-            }
-            if (keyword.contains("Command not found")) {
-                return;
-            }
-            for (Command command : this.commands) {
-                if (keyword.contains(command.getReactKeyWord())) {
-                    if (command.isAdminCommand()) {
-                        Guild guild = null;
-                        if (event.isFromGuild()) {
-                            guild = event.getGuild();
-                        }
-                    }
-                    command.executeReact(event.getReactionEmote(), event.getUser(), message);
-                    return;
-                }
-            }
-        }
-    }
-
-
-    @Override
-    public void onMessageReactionRemove(final MessageReactionRemoveEvent event) {
-        Message message = event.getChannel().retrieveMessageById(event.getMessageId()).complete();
-        if (!message.getAuthor().isBot()) {
-            return;
-        }
-        if (event.getUser() == null) {
-            return;
-        }
-        if (event.getUser().isBot()) {
+        if (!hasPermission(message)) {
             return;
         }
         if (message.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
-            String keyWord = "";
-            if (message.getEmbeds().size() != 0) {
-                MessageEmbed.AuthorInfo author = message.getEmbeds().get(0).getAuthor();
-                if (author != null) {
-                    keyWord = author.getName();
-                } else {
-                    String title = message.getEmbeds().get(0).getTitle();
-                    if (title != null) {
-                        keyWord = title;
-                    }
-                }
-            } else {
-                keyWord = message.getContentRaw();
-            }
+            String keyWord = getKeyword(message);
             if (keyWord == null) {
                 return;
             }
-            if (keyWord.contains("Command not found")) {
+            if (keyWord.length() == 0) {
                 return;
             }
-            if (keyWord.length() == 0) {
+            if (keyWord.contains("Command not found")) {
                 return;
             }
             for (Command command : this.commands) {
@@ -217,6 +137,39 @@ public class CommandManager extends ListenerAdapter {
                 }
             }
         }
+    }
+
+    private boolean hasPermission(Message message) {
+        if (!message.isFromGuild()) {
+            return true;
+        }
+        Guild guild = message.getGuild();
+        GuildChannel channel = guild.getGuildChannelById(message.getChannel().getId());
+        if (!guild.getSelfMember().hasPermission(channel, Permission.MESSAGE_WRITE)) {
+            return false;
+        }
+        if (!guild.getSelfMember().hasPermission(channel, Permission.MESSAGE_ADD_REACTION)) {
+            return false;
+        }
+        return true;
+    }
+
+    private String getKeyword(Message message) {
+        String keyWord = null;
+        if (message.getEmbeds().size() != 0) {
+            MessageEmbed.AuthorInfo author = message.getEmbeds().get(0).getAuthor();
+            if (author != null) {
+                keyWord = author.getName();
+            } else {
+                String title = message.getEmbeds().get(0).getTitle();
+                if (title != null) {
+                    keyWord = title;
+                }
+            }
+        } else {
+            keyWord = message.getContentRaw();
+        }
+        return keyWord;
     }
 
     public Set<Command> getAvailableCommands() {

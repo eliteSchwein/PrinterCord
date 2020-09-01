@@ -9,38 +9,38 @@ import org.json.simple.JsonObject;
  */
 public class VersionCommand extends OctoPrintCommand {
 
-	public VersionCommand(OctoPrintInstance requestor) {
-		super(requestor, "version");
+    public VersionCommand(OctoPrintInstance requestor) {
+        super(requestor, "version");
 
-	}
+    }
 
-	/**
-	 * @return the api version
-	 */
-	public String getAPIVersion() {
-		String result = null;
+    /**
+     * @return the api version
+     */
+    public String getAPIVersion() {
+        String result = null;
 
-		JsonObject json = g_comm.executeQuery(this.createRequest());
+        JsonObject json = g_comm.executeQuery(this.createRequest());
 
-		if (json != null) {
-			result = json.getString("api");
-		}
+        if (json != null) {
+            result = json.getString("api");
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * @return the server version
-	 */
-	public String getServerVersion() {
-		String result = null;
+    /**
+     * @return the server version
+     */
+    public String getServerVersion() {
+        String result = null;
 
-		JsonObject json = g_comm.executeQuery(this.createRequest());
+        JsonObject json = g_comm.executeQuery(this.createRequest());
 
-		if (json != null) {
-			result = json.getString("server");
-		}
+        if (json != null) {
+            result = json.getString("server");
+        }
 
-		return result;
-	}
+        return result;
+    }
 }

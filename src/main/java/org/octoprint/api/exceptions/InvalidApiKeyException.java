@@ -5,10 +5,10 @@ package org.octoprint.api.exceptions;
  */
 public class InvalidApiKeyException extends OctoPrintAPIException {
 
-	public static final int STATUS_CODE = 401;
+    public static final int STATUS_CODE = 401;
 
-	public InvalidApiKeyException(final String message) {
-		super(STATUS_CODE, message);
-	}
+    public InvalidApiKeyException(final String message) {
+        super(STATUS_CODE, message);
+    }
 
 }

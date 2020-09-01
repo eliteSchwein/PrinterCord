@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class ConnectionFailedException extends OctoPrintAPIException {
 
-	public ConnectionFailedException(final IOException cause) {
-		super("Couldn't connect to server!", cause);
-	}
+    public ConnectionFailedException(final IOException cause) {
+        super("Couldn't connect to server!", cause);
+    }
 }

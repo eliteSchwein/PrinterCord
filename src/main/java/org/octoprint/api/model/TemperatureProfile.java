@@ -14,48 +14,48 @@ import java.io.Writer;
  * @author rweber
  */
 public final class TemperatureProfile implements Jsonable, JSONLoader {
-	private JsonObject m_json = null;
+    private JsonObject m_json = null;
 
-	public TemperatureProfile() {
-		m_json = new JsonObject();
-	}
+    public TemperatureProfile() {
+        m_json = new JsonObject();
+    }
 
-	public String getName() {
-		return m_json.get("name").toString();
-	}
+    public String getName() {
+        return m_json.get("name").toString();
+    }
 
-	/**
-	 * @return the bed temp of this profile, in degrees celsius
-	 */
-	public Long getBedTemp() {
-		return m_json.getLong("bed");
-	}
+    /**
+     * @return the bed temp of this profile, in degrees celsius
+     */
+    public Long getBedTemp() {
+        return m_json.getLong("bed");
+    }
 
-	/**
-	 * @return the extruder temp of this profile, in degrees celsius
-	 */
-	public Long getExtruderTemp() {
-		return m_json.getLong("extruder");
-	}
+    /**
+     * @return the extruder temp of this profile, in degrees celsius
+     */
+    public Long getExtruderTemp() {
+        return m_json.getLong("extruder");
+    }
 
-	@Override
-	public String toString() {
-		return this.getName();
-	}
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 
-	@Override
-	public void loadJSON(JsonObject json) {
-		m_json = json;
-	}
+    @Override
+    public void loadJSON(JsonObject json) {
+        m_json = json;
+    }
 
-	@Override
-	public String toJson() {
-		return m_json.toJson();
-	}
+    @Override
+    public String toJson() {
+        return m_json.toJson();
+    }
 
-	@Override
-	public void toJson(Writer arg0) throws IOException {
-		arg0.write(this.toJson());
-	}
+    @Override
+    public void toJson(Writer arg0) throws IOException {
+        arg0.write(this.toJson());
+    }
 
 }
