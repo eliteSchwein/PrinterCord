@@ -118,10 +118,7 @@ public class CommandManager extends ListenerAdapter {
             if (keyWord == null) {
                 return;
             }
-            if (keyWord.length() == 0) {
-                return;
-            }
-            if (keyWord.contains("Command not found")) {
+            if (keyWord.length() == 0 || keyWord.contains("Command not found")) {
                 return;
             }
             for (Command command : this.commands) {
