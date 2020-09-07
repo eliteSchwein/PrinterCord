@@ -119,4 +119,11 @@ public class OctoPrintInstance {
         throw new OctoPrintAPIException(statusCode, output);
     }
 
+    public String getUrl() {
+        return m_url.toString();
+    }
+
+    public String getApiKey() {
+        return m_key;
+    }
 }
