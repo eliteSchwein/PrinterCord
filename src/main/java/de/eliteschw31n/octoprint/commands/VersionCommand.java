@@ -1,5 +1,6 @@
-package org.octoprint.api;
+package de.eliteschw31n.octoprint.commands;
 
+import de.eliteschw31n.octoprint.OctoPrintInstance;
 import org.json.simple.JsonObject;
 
 /**

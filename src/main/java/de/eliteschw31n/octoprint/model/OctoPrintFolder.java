@@ -1,4 +1,4 @@
-package org.octoprint.api.model;
+package de.eliteschw31n.octoprint.model;
 
 import org.json.simple.JsonArray;
 import org.json.simple.JsonObject;

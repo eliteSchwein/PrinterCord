@@ -1,4 +1,4 @@
-package org.octoprint.api.exceptions;
+package de.eliteschw31n.octoprint.exceptions;
 
 /**
  * Created by Hendrik on 30.09.2017.

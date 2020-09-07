@@ -1,4 +1,4 @@
-package org.octoprint.api.exceptions;
+package de.eliteschw31n.octoprint.exceptions;
 
 import java.io.IOException;
 

@@ -1,4 +1,7 @@
-package org.octoprint.api;
+package de.eliteschw31n.octoprint.commands;
+
+import de.eliteschw31n.octoprint.OctoPrintInstance;
+import de.eliteschw31n.octoprint.util.OctoPrintHttpRequest;
 
 /**
  * Command classes (REST endpoints) extend this class to provide functionality to the library

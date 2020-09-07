@@ -1,12 +1,14 @@
-package org.octoprint.api;
+package de.eliteschw31n.octoprint.commands;
 
+import de.eliteschw31n.octoprint.OctoPrintInstance;
+import de.eliteschw31n.octoprint.exceptions.OctoPrintAPIException;
+import de.eliteschw31n.octoprint.model.Axis;
+import de.eliteschw31n.octoprint.model.PrinterState;
+import de.eliteschw31n.octoprint.model.TemperatureInfo;
+import de.eliteschw31n.octoprint.util.JSONUtils;
+import de.eliteschw31n.octoprint.util.OctoPrintHttpRequest;
 import org.json.simple.JsonArray;
 import org.json.simple.JsonObject;
-import org.octoprint.api.exceptions.OctoPrintAPIException;
-import org.octoprint.api.model.Axis;
-import org.octoprint.api.model.PrinterState;
-import org.octoprint.api.model.TemperatureInfo;
-import org.octoprint.api.util.JSONUtils;
 
 /**
  * Implementation of commands found under the Printer (http://docs.octoprint.org/en/master/api/printer.html) endpoint.

@@ -1,11 +1,13 @@
-package org.octoprint.api;
+package de.eliteschw31n.octoprint.commands;
 
+import de.eliteschw31n.octoprint.OctoPrintInstance;
+import de.eliteschw31n.octoprint.model.FileType;
+import de.eliteschw31n.octoprint.model.OctoPrintFile;
+import de.eliteschw31n.octoprint.model.OctoPrintFileInformation;
+import de.eliteschw31n.octoprint.model.OctoPrintFolder;
+import de.eliteschw31n.octoprint.util.OctoPrintHttpRequest;
 import org.json.simple.JsonArray;
 import org.json.simple.JsonObject;
-import org.octoprint.api.model.FileType;
-import org.octoprint.api.model.OctoPrintFile;
-import org.octoprint.api.model.OctoPrintFileInformation;
-import org.octoprint.api.model.OctoPrintFolder;
 
 import java.util.ArrayList;
 import java.util.List;

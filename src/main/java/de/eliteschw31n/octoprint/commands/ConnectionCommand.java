@@ -1,8 +1,10 @@
-package org.octoprint.api;
+package de.eliteschw31n.octoprint.commands;
 
+import de.eliteschw31n.octoprint.OctoPrintInstance;
+import de.eliteschw31n.octoprint.model.ConnectionState;
+import de.eliteschw31n.octoprint.util.JSONUtils;
+import de.eliteschw31n.octoprint.util.OctoPrintHttpRequest;
 import org.json.simple.JsonObject;
-import org.octoprint.api.model.ConnectionState;
-import org.octoprint.api.util.JSONUtils;
 
 /**
  * Implementation of commands found under the Connection (http://docs.octoprint.org/en/master/api/connection.html) endpoint.

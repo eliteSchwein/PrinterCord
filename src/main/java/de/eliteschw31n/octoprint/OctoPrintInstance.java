@@ -1,12 +1,13 @@
-package org.octoprint.api;
+package de.eliteschw31n.octoprint;
 
+import de.eliteschw31n.octoprint.exceptions.ConnectionFailedException;
+import de.eliteschw31n.octoprint.exceptions.InvalidApiKeyException;
+import de.eliteschw31n.octoprint.exceptions.NoContentException;
+import de.eliteschw31n.octoprint.exceptions.OctoPrintAPIException;
+import de.eliteschw31n.octoprint.util.OctoPrintHttpRequest;
 import org.json.simple.DeserializationException;
 import org.json.simple.JsonObject;
 import org.json.simple.Jsoner;
-import org.octoprint.api.exceptions.ConnectionFailedException;
-import org.octoprint.api.exceptions.InvalidApiKeyException;
-import org.octoprint.api.exceptions.NoContentException;
-import org.octoprint.api.exceptions.OctoPrintAPIException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

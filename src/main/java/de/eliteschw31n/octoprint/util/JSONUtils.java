@@ -1,4 +1,4 @@
-package org.octoprint.api.util;
+package de.eliteschw31n.octoprint.util;
 
 import org.json.simple.DeserializationException;
 import org.json.simple.JsonArray;

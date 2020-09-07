@@ -1,9 +1,10 @@
-package org.octoprint.api;
+package de.eliteschw31n.octoprint.commands;
 
+import de.eliteschw31n.octoprint.OctoPrintInstance;
+import de.eliteschw31n.octoprint.model.TemperatureProfile;
+import de.eliteschw31n.octoprint.util.JSONUtils;
 import org.json.simple.JsonArray;
 import org.json.simple.JsonObject;
-import org.octoprint.api.model.TemperatureProfile;
-import org.octoprint.api.util.JSONUtils;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,8 @@
-package org.octoprint.api.model;
+package de.eliteschw31n.octoprint.model;
 
+import de.eliteschw31n.octoprint.util.JSONLoader;
 import org.json.simple.JsonObject;
 import org.json.simple.Jsonable;
-import org.octoprint.api.util.JSONLoader;
 
 import java.io.IOException;
 import java.io.Writer;

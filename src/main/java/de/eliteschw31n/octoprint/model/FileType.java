@@ -1,4 +1,4 @@
-package org.octoprint.api.model;
+package de.eliteschw31n.octoprint.model;
 
 public enum FileType {
     MODEL, MACHINECODE, FOLDER;
