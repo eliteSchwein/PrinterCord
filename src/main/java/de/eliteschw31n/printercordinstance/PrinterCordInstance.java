@@ -6,6 +6,7 @@ public class PrinterCordInstance {
     private final long ownerId;
     private final OctoPrintInstance octoPrintInstance;
     private String webCam;
+    private boolean setupProcess;
 
     public PrinterCordInstance(final OctoPrintInstance octoPrintInstance, final String webCam, final long ownerId) {
         this.octoPrintInstance = octoPrintInstance;
@@ -27,5 +28,13 @@ public class PrinterCordInstance {
 
     public long getOwnerId() {
         return ownerId;
+    }
+
+    public boolean isSetupProcess() {
+        return setupProcess;
+    }
+
+    public void setSetupProcess(boolean setupProcess) {
+        this.setupProcess = setupProcess;
     }
 }

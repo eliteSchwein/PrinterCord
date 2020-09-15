@@ -1,12 +1,11 @@
 package de.eliteschw31n.events;
 
-import de.eliteschw31n.Main;
 import de.eliteschw31n.utils.Command;
+import de.eliteschw31n.utils.Event;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.GenericMessageReactionEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.reflections.Reflections;
 
 import java.util.Arrays;
@@ -14,19 +13,22 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CommandManager extends ListenerAdapter {
-    private final Main printerCord;
-    private final Set<Command> commands;
+public class CommandManager extends Event {
+    private Set<Command> commands;
 
-    public CommandManager(final Main printerCord) {
-        this.printerCord = printerCord;
+    public CommandManager() {
+        super("CommandManager");
+    }
+
+    @Override
+    public void execute() {
         this.commands = new HashSet<>();
         final Set<Class<? extends Command>> classes = new Reflections("de.eliteschw31n.commands")
                 .getSubTypesOf(Command.class);
         for (Class<? extends Command> cmdClass : classes) {
             try {
                 final Command command = cmdClass.getDeclaredConstructor().newInstance();
-                command.setInstance(printerCord);
+                command.setInstance(getMain());
                 if (commands.add(command)) {
                     System.out.println("Registered " + command.getCommand() + " Command");
                 }
@@ -34,7 +36,7 @@ public class CommandManager extends ListenerAdapter {
                 exception.printStackTrace();
             }
         }
-        printerCord.getDiscordBot().addEventListener(this);
+        getMain().getDiscordBot().addEventListener(this);
     }
 
     @Override

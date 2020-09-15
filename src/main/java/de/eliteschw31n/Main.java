@@ -2,9 +2,11 @@ package de.eliteschw31n;
 
 
 import de.eliteschw31n.events.CommandManager;
+import de.eliteschw31n.utils.Event;
 import de.eliteschw31n.utils.MainConfiguration;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import org.reflections.Reflections;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import oshi.SystemInfo;
@@ -12,16 +14,15 @@ import oshi.hardware.CentralProcessor;
 import oshi.hardware.HardwareAbstractionLayer;
 
 import javax.security.auth.login.LoginException;
-import javax.swing.*;
+import javax.swing.Timer;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class Main {
     private static Properties properties = new Properties();
     private MainConfiguration mainConfiguration;
     private JDA discordBot;
+    private Set<Event> events;
     private CommandManager commandManager;
     private SystemInfo systemInfo;
     private long[] cpuPrevTicks = new long[CentralProcessor.TickType.values().length];
@@ -71,7 +72,25 @@ public class Main {
             e.printStackTrace();
             return;
         }
-        commandManager = new CommandManager(this);
+        System.out.println("Load Events...");
+        events = new HashSet<>();
+        final Set<Class<? extends Event>> classes = new Reflections("de.eliteschw31n.events")
+                .getSubTypesOf(Event.class);
+        for (Class<? extends Event> eventClass : classes) {
+            try {
+                final Event event = eventClass.getDeclaredConstructor().newInstance();
+                event.setInstance(this);
+                event.execute();
+                if (event.getEventName().equals("CommandManager")) {
+                    commandManager = (CommandManager) event;
+                }
+                if (events.add(event)) {
+                    System.out.println("Registered " + event.getEventName() + " Event");
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
         System.out.println("Load Instances...");
         System.out.println("Load OSHI...");
         systemInfo = new SystemInfo();
@@ -116,5 +135,9 @@ public class Main {
 
     public double getCpuLoad() {
         return cpuLoad;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
     }
 }
