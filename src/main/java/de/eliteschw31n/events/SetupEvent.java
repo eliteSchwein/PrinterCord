@@ -15,6 +15,5 @@ public class SetupEvent extends Event {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        
     }
 }

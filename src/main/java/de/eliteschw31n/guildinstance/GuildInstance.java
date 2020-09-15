@@ -3,6 +3,7 @@ package de.eliteschw31n.guildinstance;
 import de.eliteschw31n.guildinstance.util.AdminRole;
 import de.eliteschw31n.printercordinstance.PrinterCordInstance;
 import de.eliteschw31n.utils.CustomCommand;
+import de.eliteschw31n.utils.SetupStep;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class GuildInstance {
     private long broadcastChannel;
     private long adminCommandChannel;
     private long generalCommandChannel;
+    private boolean setupProcess;
+    private int setupStep;
+    private SetupStep setupPage;
 
     public GuildInstance(final List<PrinterCordInstance> printerCordInstances, final boolean percentJobPing,
                          final int jobDelay, final List<AdminRole> adminRoles, final List<CustomCommand> customCommands,
@@ -102,5 +106,29 @@ public class GuildInstance {
 
     public void setGeneralCommandChannel(long generalCommandChannel) {
         this.generalCommandChannel = generalCommandChannel;
+    }
+
+    public boolean isSetupProcess() {
+        return setupProcess;
+    }
+
+    public void setSetupProcess(boolean setupProcess) {
+        this.setupProcess = setupProcess;
+    }
+
+    public SetupStep getSetupPage() {
+        return setupPage;
+    }
+
+    public void setSetupPage(SetupStep setupPage) {
+        this.setupPage = setupPage;
+    }
+
+    public int getSetupStep() {
+        return setupStep;
+    }
+
+    public void setSetupStep(int setupStep) {
+        this.setupStep = setupStep;
     }
 }
