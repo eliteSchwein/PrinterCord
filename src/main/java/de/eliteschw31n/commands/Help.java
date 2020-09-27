@@ -92,10 +92,10 @@ public class Help extends Command {
                 generalCommands.add(command);
             }
         }
-        int maxsite = (int) Math.ceil((double) (generalCommands.size()) / 4.0) + (int) Math.ceil((double) (adminCommands.size()) / 4.0);
+        int maxSite = (int) Math.ceil((double) (generalCommands.size()) / 4.0) + (int) Math.ceil((double) (adminCommands.size()) / 4.0);
         if (site == 1 && !next) {
-            site = maxsite;
-        } else if (site == maxsite && next) {
+            site = maxSite;
+        } else if (site == maxSite && next) {
             site = 1;
         } else if (next) {
             site = site + 1;
@@ -123,10 +123,10 @@ public class Help extends Command {
         }
         embedBuilder.setDescription(description.toString());
         if (admin) {
-            embedBuilder.setAuthor("Help Admin " + backupSite + "/" + maxsite);
+            embedBuilder.setAuthor("Help Admin " + backupSite + "/" + maxSite);
             embedBuilder.setThumbnail(getMain().getMainConfiguration().getHelpAdminEmbed());
         } else {
-            embedBuilder.setAuthor("Help General " + backupSite + "/" + maxsite);
+            embedBuilder.setAuthor("Help General " + backupSite + "/" + maxSite);
             embedBuilder.setThumbnail(getMain().getMainConfiguration().getHelpEmbed());
         }
         return embedBuilder;

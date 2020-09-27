@@ -2,6 +2,7 @@ package de.eliteschw31n;
 
 
 import de.eliteschw31n.events.CommandManager;
+import de.eliteschw31n.utils.DataBase;
 import de.eliteschw31n.utils.Event;
 import de.eliteschw31n.utils.MainConfiguration;
 import net.dv8tion.jda.api.JDA;
@@ -27,6 +28,7 @@ public class Main {
     private SystemInfo systemInfo;
     private long[] cpuPrevTicks = new long[CentralProcessor.TickType.values().length];
     private double cpuLoad = 0;
+    private DataBase dataBase;
 
     public Main() {
         System.out.println("PrinterCord " + properties.getProperty("version") + " starting...");
@@ -63,7 +65,9 @@ public class Main {
         }
         Map<String, Object> yamlData = yaml.load(inputStream);
         mainConfiguration = new MainConfiguration(((String) yamlData.get("discordToken")), (String) yamlData.get("embedGeneral"), (String) yamlData.get("embedHelp"), (String) yamlData.get("embedAdminHelp"), (String) yamlData.get("embedServerInfo"));
-        System.out.println("Check Database...");
+        System.out.println("Connect Database...");
+        dataBase = new DataBase();
+        dataBase.setup();
         System.out.println("Start Bot...");
         try {
             discordBot = JDABuilder.createDefault(mainConfiguration.getDiscordToken()).build();
