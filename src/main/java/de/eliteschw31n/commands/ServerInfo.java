@@ -207,6 +207,7 @@ public class ServerInfo extends Command {
         double freeRam = Runtime.getRuntime().freeMemory() / (double) (1024 * 1024);
         printerCordBuilder.append("TITLE:PrinterCord ");
         printerCordBuilder.append("FIELD:Commands:" + getMain().getCommandManager().getAvailableCommands().size() + " ");
+        printerCordBuilder.append("FIELD:Events:" + getMain().getEvents().size() + " ");
         printerCordBuilder.append("FIELD:Version:" + Main.getProperties().getProperty("version") + " ");
         printerCordBuilder.append("FIELD:JDA_Version:" + JDAInfo.VERSION + " ");
         printerCordBuilder.append("FIELD:Ram_Usage:" + round((totalRam - freeRam), 2) + "/" + round(totalRam, 2) + "MB");
