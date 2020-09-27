@@ -59,15 +59,18 @@ public class ServerInfo extends Command {
         for (String disk : getDisks(getMain().getSystemInfo())) {
             pages.add(disk);
         }
+        for (String gpu : getGraphicsCards(getMain().getSystemInfo())) {
+            pages.add(gpu);
+        }
         pages.add(getOS(getMain().getSystemInfo()));
         pages.add(getNetwork());
         pages.add(getJava());
         pages.add(getPrinterCord());
         EmbedBuilder embedBuilder = getEmbed(user);
-        int maxsite = pages.size();
+        int maxSite = pages.size();
         if (site == 1 && !next) {
-            site = maxsite;
-        } else if (site == maxsite && next) {
+            site = maxSite;
+        } else if (site == maxSite && next) {
             site = 1;
         } else if (next) {
             site = site + 1;
@@ -77,7 +80,7 @@ public class ServerInfo extends Command {
         String page = pages.get(site - 1);
         translateTemplate(page, embedBuilder);
         embedBuilder.setThumbnail(getMain().getMainConfiguration().getServerInfoEmbed());
-        embedBuilder.setAuthor("Serverinfo " + site + "/" + maxsite);
+        embedBuilder.setAuthor("Serverinfo " + site + "/" + maxSite);
         return embedBuilder;
     }
 
@@ -149,6 +152,24 @@ public class ServerInfo extends Command {
             diskPages.add(diskBuilder.toString());
         }
         return diskPages;
+    }
+
+    private List<String> getGraphicsCards(SystemInfo systemInfo) {
+        List<String> gpuPages = new ArrayList<>();
+        HardwareAbstractionLayer hardware = systemInfo.getHardware();
+        List<GraphicsCard> graphicsCards = hardware.getGraphicsCards();
+        for (int i = 0; i < graphicsCards.size(); i++) {
+            GraphicsCard graphicsCard = graphicsCards.get(i);
+            double vRamSize = graphicsCard.getVRam() / (double) (1024 * 1024 * 1024);
+            StringBuilder gpuBuilder = new StringBuilder();
+            gpuBuilder.append("TITLE:GPU_" + (i + 1) + " " +
+                    "FIELD:Name:" + graphicsCard.getName().replace(" ", "_").replace(":", ";") + " " +
+                    "FIELD:Vendor:" + graphicsCard.getVendor().replace(" ", "_").replace(":", ";") + " " +
+                    "FIELD:Version:" + graphicsCard.getVersionInfo().replace(" ", "_").replace(":", ";") + " " +
+                    "FIELD:VRam:" + round(vRamSize, 2) + "GB" + " ");
+            gpuPages.add(gpuBuilder.toString());
+        }
+        return gpuPages;
     }
 
     private String getOS(SystemInfo systemInfo) {
